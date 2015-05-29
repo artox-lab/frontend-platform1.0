@@ -16,21 +16,14 @@ var App = React.createFactory(require('../Components/Main'));
 
 var request = require('request');
 
-
-
-
 router.get('/', function(req, res, next) {
-	var html = React.renderToString( App({items: props}) );
-
 	request('http://api2.a-kulitsky.ru/', function (error, response, body) {
+        var html = React.renderToString( App({items: JSON.parse(body)}) );
 		res.render('index', {
 			title: 'Express',
 			main: html
 		});
 	});
-
-
-
 });
 
 module.exports = router;
