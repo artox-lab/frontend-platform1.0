@@ -14,13 +14,22 @@ var AppFactory = React.createFactory(require('../Components/App'));
 var props = require('../data/smarty-data.json');
 var App = React.createFactory(require('../Components/Main'));
 
+var request = require('request');
+
+
+
+
 router.get('/', function(req, res, next) {
 	var html = React.renderToString( App({items: props}) );
 
-	res.render('index', {
-		title: 'Express',
-		main: html
+	request('http://api2.a-kulitsky.ru/', function (error, response, body) {
+		res.render('index', {
+			title: 'Express',
+			main: html
+		});
 	});
+
+
 
 });
 
